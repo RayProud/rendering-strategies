@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import ThemeProvider from "./theme-provider";
 import "./globals.css";
+import Links from "./links";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -23,12 +25,22 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  console.log("Layout - meant to be Static (?) Server");
+
   return (
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        <time
+          dateTime={new Date().toLocaleTimeString()}
+          suppressHydrationWarning
+        >
+          {new Date().toLocaleTimeString()}
+        </time>
+        <Links />
+
+        <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>
   );
