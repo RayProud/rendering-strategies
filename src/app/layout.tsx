@@ -1,14 +1,8 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
-// import ThemeProvider from "./theme-provider";
+import ThemeProvider from "./theme-provider";
 import "./globals.css";
-// import StateComponent from "./state-component-client-wrapper";
 import Links from "./links";
-
-// <ThemeProvider>
-//   <StateComponent />
-//   {children}
-// </ThemeProvider>
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -45,7 +39,8 @@ export default function RootLayout({
           {new Date().toLocaleTimeString()}
         </time>
         <Links />
-        {children}
+
+        <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>
   );
