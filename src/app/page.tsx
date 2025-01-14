@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import Links from '@/app/links';
 
 export default function Home() {
   // console.log('Page - meant to be Static (?) Server');
