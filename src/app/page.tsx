@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import Link from 'next/link';
+import Links from '@/app/links';
 
 export default function Home() {
   // console.log('Page - meant to be Static (?) Server');
@@ -14,31 +14,6 @@ export default function Home() {
           height={38}
           priority
         />
-
-        <Link href="/test">
-          <button
-            type="button"
-            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
-          >
-            To Static Server Side Test
-          </button>
-        </Link>
-        <Link href="/client">
-          <button
-            type="button"
-            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
-          >
-            To Client Only Page
-          </button>
-        </Link>
-        <Link href="/nav">
-          <button
-            type="button"
-            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
-          >
-            To Dynamic Server Side Nav
-          </button>
-        </Link>
 
         <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
           <li className="mb-2">

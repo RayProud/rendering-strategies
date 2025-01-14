@@ -5,7 +5,7 @@ export default async function UseServerClientDynamic({
 }: {
   searchParams: { [key: string]: string | string[] | undefined };
 }) {
-  // console.log('Dynamic Server Side page with use server', searchParams);
+  console.log('Dynamic Server Side page with use server', searchParams);
   return (
     <div>
       <h1>

@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import ThemeProvider from './theme-provider';
 import './globals.css';
-import Links from './links';
+import Links from '@/app/links';
 
 const geistSans = localFont({
   src: './fonts/GeistVF.woff',
@@ -34,15 +34,22 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <time
-          dateTime={new Date().toLocaleTimeString()}
-          suppressHydrationWarning
-        >
-          {new Date().toLocaleTimeString()}
-        </time>
-        <Links />
+        <div className="flex flex-col flex-wrap justify-center items-center">
+          <time
+            dateTime={new Date().toLocaleTimeString()}
+            suppressHydrationWarning
+          >
+            {new Date().toLocaleTimeString()}
+          </time>
 
-        <ThemeProvider>{children}</ThemeProvider>
+          <h1 className="mt-2 text-pretty text-4xl font-semibold tracking-tight text-gray-900 sm:text-3xl mb-3">
+            Choose which type of rendering you want to try out
+          </h1>
+
+          <Links />
+
+          <ThemeProvider>{children}</ThemeProvider>
+        </div>
       </body>
     </html>
   );
