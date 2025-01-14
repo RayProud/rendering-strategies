@@ -1,7 +1,7 @@
 // static — the
 // server side
 
-export const runtime = 'edge';
+export const runtime = 'nodejs';
 
 export default function Server() {
   console.log('Server Side Static page');

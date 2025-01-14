@@ -12,6 +12,7 @@
     "cf-typegen": "wrangler types --env-interface CloudflareEnv env.d.ts"
   },
   "dependencies": {
+    "fs": "^0.0.1-security",
     "next": "14.2.15",
     "react": "^18",
     "react-dom": "^18",

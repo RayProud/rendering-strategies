@@ -4,7 +4,7 @@ import ThemeProvider from './theme-provider';
 import './globals.css';
 import Links from '@/app/links';
 
-export const runtime = 'edge';
+export const runtime = 'nodejs';
 
 const geistSans = localFont({
   src: './fonts/GeistVF.woff',

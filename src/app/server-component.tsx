@@ -4,7 +4,7 @@
 
 import React from 'react';
 import { promises as fs } from 'fs';
-import StateComponent from './state-component-client-wrapper';
+// import StateComponent from './state-component-client-wrapper';
 // import StateComponent from './state-component';
 
 // export const runtime = "nodejs";
@@ -21,7 +21,7 @@ export default async function ServerComponent() {
 
       <p>Files from the server component: {files}</p>
 
-      <StateComponent files={files} />
+      {/*<StateComponent files={files} />*/}
     </div>
   );
 }

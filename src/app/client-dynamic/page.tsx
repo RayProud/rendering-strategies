@@ -1,5 +1,7 @@
 'use client';
 
+export const runtime = 'nodejs';
+
 export default function ClientDynamic({
   searchParams,
 }: {

@@ -13,7 +13,7 @@ type Props = {
 export default function StateComponent(props: Props) {
   const [state] = useState(1);
 
-  const files = props?.files || 'noting';
+  const files = props?.files || 'nothing';
 
   return (
     <div>

@@ -2,6 +2,9 @@
 
 .idea/
 
+.open-next/
+.wrangler/
+
 # dependencies
 /node_modules
 /.pnp
