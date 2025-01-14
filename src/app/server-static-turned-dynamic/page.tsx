@@ -1,5 +1,7 @@
 import DynamicServerComponent from '@/app/dynamic-server-component';
 
+export const runtime = 'edge';
+
 export default function ServerStaticTurnedDynamic() {
   console.log('\nStatic Server Side Turned Dynamic page');
   return (

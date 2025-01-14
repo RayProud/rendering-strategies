@@ -1,5 +1,7 @@
 import { cookies } from 'next/headers';
-import ServerComponent from '../server-component';
+// import ServerComponent from '../server-component';
+
+export const runtime = 'edge';
 
 // dynamic
 // client side
@@ -27,7 +29,7 @@ export default function ServerDynamic() {
           suppressHydrationWarning
         >
           {new Date().toLocaleTimeString()}
-          <ServerComponent />
+          {/*<ServerComponent />*/}
         </time>
       </p>
     </div>

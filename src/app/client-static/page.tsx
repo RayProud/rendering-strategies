@@ -1,5 +1,7 @@
 'use client';
 
+export const runtime = 'edge';
+
 export default function Client() {
   console.log('Client Side Static page');
   return (
