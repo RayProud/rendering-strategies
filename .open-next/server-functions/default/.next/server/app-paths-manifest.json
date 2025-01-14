@@ -1,0 +1,11 @@
+{
+  "/_not-found/page": "app/_not-found/page.js",
+  "/client-dynamic/page": "app/client-dynamic/page.js",
+  "/client-static/page": "app/client-static/page.js",
+  "/favicon.ico/route": "app/favicon.ico/route.js",
+  "/server-dynamic/page": "app/server-dynamic/page.js",
+  "/server-static-turned-dynamic/page": "app/server-static-turned-dynamic/page.js",
+  "/server-static/page": "app/server-static/page.js",
+  "/page": "app/page.js",
+  "/server-static-use-server/page": "app/server-static-use-server/page.js"
+}

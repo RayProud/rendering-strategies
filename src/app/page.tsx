@@ -1,5 +1,7 @@
 import Image from 'next/image';
 
+export const runtime = 'edge';
+
 export default function Home() {
   // console.log('Page - meant to be Static (?) Server');
   return (
