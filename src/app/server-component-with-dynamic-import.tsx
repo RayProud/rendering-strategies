@@ -1,17 +1,17 @@
 // import "server-only";
-import React, { Suspense } from "react";
-import { promises as fs } from "fs";
+import React, { Suspense } from 'react';
+import { promises as fs } from 'fs';
 // import StateComponent from "./state-component-client-wrapper";
 //
 //       // <StateComponent files={files} />
 
-const StateComponent = React.lazy(() => import("./state-component"));
+const StateComponent = React.lazy(() => import('./state-component'));
 
 export default async function ServerComponent() {
-  console.log("ServerComponent message");
+  console.log('ServerComponent message');
   const env = process.env.NODE_ENV;
 
-  const files = await fs.readdir(".");
+  const files = await fs.readdir('.');
 
   return (
     <div>

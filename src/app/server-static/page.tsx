@@ -1,12 +1,12 @@
 // static — the
 // server side
 
-export default function Test() {
-  console.log("Server Side Static page");
+export default function Server() {
+  console.log('Server Side Static page');
   return (
     <div>
       <h1>
-        Hello Again{" "}
+        Server Side Static page{' '}
         <time
           dateTime={new Date().toLocaleTimeString()}
           suppressHydrationWarning
