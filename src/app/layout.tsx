@@ -27,9 +27,9 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  // console.log(
-  //   'Layout - meant to be Static Server Component (not render at request time)',
-  // );
+  console.log(
+    'Layout - meant to be Static Server Component (not render at request time)',
+  );
 
   return (
     <html lang="en">

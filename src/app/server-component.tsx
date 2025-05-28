@@ -1,13 +1,8 @@
-// import "server-only";
-
-// "use client"
-
 import React from 'react';
 import { promises as fs } from 'fs';
-// import StateComponent from './state-component-client-wrapper';
-// import StateComponent from './state-component';
+import StateComponent from './state-component-client-wrapper';
 
-// export const runtime = "nodejs";
+export const runtime = 'nodejs';
 
 export default async function ServerComponent() {
   console.log('ServerComponent message');
@@ -21,7 +16,7 @@ export default async function ServerComponent() {
 
       <p>Files from the server component: {files}</p>
 
-      {/*<StateComponent files={files} />*/}
+      <StateComponent files={files} />
     </div>
   );
 }

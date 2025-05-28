@@ -1,6 +1,3 @@
-// static — the
-// server side
-
 export const runtime = 'nodejs';
 
 export default function Server() {
