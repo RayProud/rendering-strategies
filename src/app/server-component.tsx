@@ -1,5 +1,4 @@
 import React from 'react';
-import { promises as fs } from 'fs';
 import StateComponent from './state-component-client-wrapper';
 
 export const runtime = 'nodejs';
@@ -8,7 +7,7 @@ export default async function ServerComponent() {
   console.log('ServerComponent message');
   const env = process.env.NODE_ENV;
 
-  const files = await fs.readdir('.');
+  const files = new Array<undefined>();
 
   return (
     <div>
