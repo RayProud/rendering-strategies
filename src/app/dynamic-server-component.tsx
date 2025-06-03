@@ -1,7 +1,7 @@
-import { cookies, type UnsafeUnwrappedCookies } from 'next/headers';
+import { cookies } from 'next/headers';
 
 export default function DynamicServerComponent() {
-  const cookieStore = (cookies() as unknown as UnsafeUnwrappedCookies);
+  const cookieStore = cookies();
   if (cookieStore) {
     console.log('Server Side Static page');
   }
