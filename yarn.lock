@@ -1326,9 +1326,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"aws-self-hoste-15@workspace:applications/aws-self-hosted-15":
+"aws-self-hosted-15@workspace:applications/aws-self-hosted-15":
   version: 0.0.0-use.local
-  resolution: "aws-self-hoste-15@workspace:applications/aws-self-hosted-15"
+  resolution: "aws-self-hosted-15@workspace:applications/aws-self-hosted-15"
   dependencies:
     "@biomejs/biome": "npm:1.9.4"
     "@types/node": "npm:20"
