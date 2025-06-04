@@ -1,0 +1,44 @@
+diff --git a/lib/react-markdown.js b/lib/react-markdown.js
+index fcf092872488466bac78765e5149d4ddee5e85ed..772105b7825ec4f5502a49dca2e7a7db962a4930 100644
+--- a/lib/react-markdown.js
++++ b/lib/react-markdown.js
+@@ -36,7 +36,20 @@ var symbols = require('./symbols');
+ 
+ var allTypes = Object.keys(defaultRenderers);
+ 
+-var ReactMarkdown = function ReactMarkdown(props) {
++var ReactMarkdown = function ReactMarkdown(tempProps) {
++  var props = {
++    renderers: {},
++    escapeHtml: true,
++    skipHtml: false,
++    sourcePos: false,
++    rawSourcePos: false,
++    transformLinkUri: uriTransformer,
++    astPlugins: [],
++    plugins: [],
++    parserOptions: {},
++    ...tempProps
++  };
++
+   var src = props.source || props.children || '';
+   var parserOptions = props.parserOptions;
+ 
+@@ -98,17 +111,6 @@ function determineAstPlugins(props) {
+   return props.astPlugins ? plugins.concat(props.astPlugins) : plugins;
+ }
+ 
+-ReactMarkdown.defaultProps = {
+-  renderers: {},
+-  escapeHtml: true,
+-  skipHtml: false,
+-  sourcePos: false,
+-  rawSourcePos: false,
+-  transformLinkUri: uriTransformer,
+-  astPlugins: [],
+-  plugins: [],
+-  parserOptions: {}
+-};
+ ReactMarkdown.propTypes = {
+   className: PropTypes.string,
+   source: PropTypes.string,

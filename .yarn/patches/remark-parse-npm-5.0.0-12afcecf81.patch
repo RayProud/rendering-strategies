@@ -1,0 +1,160 @@
+diff --git a/lib/tokenize/blockquote.js b/lib/tokenize/blockquote.js
+index bd700d6a6c8276aef9684748ef71c3ce1b5cc4df..d6a087377701d5694bdbae898ce0237553d752de 100644
+--- a/lib/tokenize/blockquote.js
++++ b/lib/tokenize/blockquote.js
+@@ -1,6 +1,5 @@
+ 'use strict';
+ 
+-var trim = require('trim');
+ var interrupt = require('../util/interrupt');
+ 
+ module.exports = blockquote;
+@@ -85,7 +84,7 @@ function blockquote(eat, value, silent) {
+ 
+     content = value.slice(index, nextIndex);
+ 
+-    if (!prefixed && !trim(content)) {
++    if (!prefixed && !content.trim()) {
+       index = startIndex;
+       break;
+     }
+diff --git a/lib/tokenize/emphasis.js b/lib/tokenize/emphasis.js
+index b2c87b4497de387f0aa1e0825691071a5356a69a..2b2a7f5d2aa4a4cc59f6cf366f41d3da92757e23 100644
+--- a/lib/tokenize/emphasis.js
++++ b/lib/tokenize/emphasis.js
+@@ -1,6 +1,5 @@
+ 'use strict';
+ 
+-var trim = require('trim');
+ var word = require('is-word-character');
+ var whitespace = require('is-whitespace-character');
+ var locate = require('../locate/emphasis');
+@@ -47,7 +46,7 @@ function emphasis(eat, value, silent) {
+       character = value.charAt(++index);
+ 
+       if (character !== marker) {
+-        if (!trim(queue) || prev === marker) {
++        if (!queue.trim() || prev === marker) {
+           return;
+         }
+ 
+diff --git a/lib/tokenize/list.js b/lib/tokenize/list.js
+index 9164c8167f8dc1a3c3c54d684b6596f88f4d8c24..b54db0f69393720a790081f4226bff446aff752d 100644
+--- a/lib/tokenize/list.js
++++ b/lib/tokenize/list.js
+@@ -2,7 +2,6 @@
+ 
+ /* eslint-disable max-params */
+ 
+-var trim = require('trim');
+ var repeat = require('repeat-string');
+ var decimal = require('is-decimal');
+ var getIndent = require('../util/get-indentation');
+@@ -277,7 +276,7 @@ function list(eat, value, silent) {
+     }
+ 
+     prevEmpty = empty;
+-    empty = !trim(content).length;
++    empty = !content.trim().length;
+ 
+     if (indented && item) {
+       item.value = item.value.concat(emptyLines, line);
+diff --git a/lib/tokenize/paragraph.js b/lib/tokenize/paragraph.js
+index 1492a027e7823717713fca015b85b37a5dc712fe..b7c81282ed6e07d450a02a24197f0c4e1a13cd82 100644
+--- a/lib/tokenize/paragraph.js
++++ b/lib/tokenize/paragraph.js
+@@ -1,6 +1,5 @@
+ 'use strict';
+ 
+-var trim = require('trim');
+ var decimal = require('is-decimal');
+ var trimTrailingLines = require('trim-trailing-lines');
+ var interrupt = require('../util/interrupt');
+@@ -84,7 +83,7 @@ function paragraph(eat, value, silent) {
+       (
+         self.inList ||
+         commonmark ||
+-        (gfm && !decimal(trim.left(subvalue).charAt(0)))
++        (gfm && !decimal(subvalue.trimStart().charAt(0)))
+       )
+     ) {
+       break;
+@@ -93,7 +92,7 @@ function paragraph(eat, value, silent) {
+     position = index;
+     index = value.indexOf(C_NEWLINE, index + 1);
+ 
+-    if (index !== -1 && trim(value.slice(position, index)) === '') {
++    if (index !== -1 && value.trim().slice(position, index) === '') {
+       index = position;
+       break;
+     }
+@@ -101,7 +100,7 @@ function paragraph(eat, value, silent) {
+ 
+   subvalue = value.slice(0, index);
+ 
+-  if (trim(subvalue) === '') {
++  if (subvalue.trim() === '') {
+     eat(subvalue);
+ 
+     return null;
+diff --git a/lib/tokenize/strong.js b/lib/tokenize/strong.js
+index 12d5785bc64a7423cff686a9c1583b2aece4d5d6..512807f90d701a6ace23583f5da7a225c8eed997 100644
+--- a/lib/tokenize/strong.js
++++ b/lib/tokenize/strong.js
+@@ -1,6 +1,5 @@
+ 'use strict';
+ 
+-var trim = require('trim');
+ var whitespace = require('is-whitespace-character');
+ var locate = require('../locate/strong');
+ 
+@@ -53,7 +52,7 @@ function strong(eat, value, silent) {
+       character = value.charAt(index + 2);
+ 
+       if (character !== marker) {
+-        if (!trim(queue)) {
++        if (!queue.trim()) {
+           return;
+         }
+ 
+diff --git a/lib/util/remove-indentation.js b/lib/util/remove-indentation.js
+index 20f18be74087eb98058685be1f9f453e27b2fcaf..d7dc89a9a85c998e3f22376e44bb11dd0382c495 100644
+--- a/lib/util/remove-indentation.js
++++ b/lib/util/remove-indentation.js
+@@ -1,6 +1,5 @@
+ 'use strict';
+ 
+-var trim = require('trim');
+ var repeat = require('repeat-string');
+ var getIndent = require('./get-indentation');
+ 
+@@ -30,7 +29,7 @@ function indentation(value, maximum) {
+ 
+     matrix[position] = indentation.stops;
+ 
+-    if (trim(values[position]).length === 0) {
++    if (values[position].trim().length === 0) {
+       continue;
+     }
+ 
+@@ -57,7 +56,7 @@ function indentation(value, maximum) {
+       }
+ 
+       if (
+-        trim(values[position]).length !== 0 &&
++        values[position].trim().length !== 0 &&
+         minIndent &&
+         index !== minIndent
+       ) {
+diff --git a/package.json b/package.json
+index 822420cb25200aa047bbfe31665604e15869c00e..af787506d8f2e6659590e7a977a6d19d79995a34 100644
+--- a/package.json
++++ b/package.json
+@@ -33,7 +33,6 @@
+     "parse-entities": "^1.1.0",
+     "repeat-string": "^1.5.4",
+     "state-toggle": "^1.0.0",
+-    "trim": "0.0.1",
+     "trim-trailing-lines": "^1.0.0",
+     "unherit": "^1.0.4",
+     "unist-util-remove-position": "^1.0.0",
