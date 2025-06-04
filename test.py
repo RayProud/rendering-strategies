@@ -5,7 +5,7 @@ import statistics
 from datetime import datetime
 
 # Configuration
-URL = "https://rendering-strategies-open-next-v1-next-14.mentimeter.workers.dev/server-static"  # Replace with your app's URL
+URL = "https://d1x8ntc9xigmis.cloudfront.net/server-static"  # AWS SST Next 15
 INTERVAL = 1  # Interval between requests in seconds
 DURATION = 60  # Duration to run the script in seconds (10 minutes)
 OUTPUT_FILE = "ttfb_results.csv"
