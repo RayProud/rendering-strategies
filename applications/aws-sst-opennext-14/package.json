@@ -2,7 +2,7 @@
   "name": "aws-sst-opennext-14",
   "description": "Uses SST OpenNext provider on Next.js 14",
   "version": "1.0.0",
-  "sideEffects": "false",
+  "sideEffects": false,
   "type": "module",
   "scripts": {
     "build": "next build",

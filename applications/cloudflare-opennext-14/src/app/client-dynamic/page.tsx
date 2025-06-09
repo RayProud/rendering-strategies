@@ -1,14 +1,12 @@
-'use client';;
-import { use } from "react";
+'use client';
 
 export const runtime = 'nodejs';
 
-export default function ClientDynamic(
-  props: {
-    searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
-  }
-) {
-  const searchParams = use(props.searchParams);
+export default function ClientDynamic({
+  searchParams,
+}: {
+  searchParams: { [key: string]: string | string[] | undefined };
+}) {
   console.log('Client Side Dynamic page', searchParams);
   return (
     <div>
