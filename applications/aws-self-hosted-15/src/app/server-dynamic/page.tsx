@@ -6,8 +6,8 @@ import ServerComponent from '../server-component';
 // RSC uses the data from the first prerender on the server (client routing will show the server time)
 // it's being updated once a minute
 
-export default function ServerDynamic() {
-  const cookieStore = cookies();
+export default async function ServerDynamic() {
+  const cookieStore = await cookies();
 
   // what makes a route dynamic?
   // use of

@@ -1,10 +1,11 @@
 'use server';
 
-export default async function UseServerClientDynamic({
-  searchParams,
-}: {
-  searchParams: { [key: string]: string | string[] | undefined };
-}) {
+export default async function UseServerClientDynamic(
+  props: {
+    searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+  }
+) {
+  const searchParams = await props.searchParams;
   console.log('Dynamic Server Side page with use server', searchParams);
   return (
     <div>
