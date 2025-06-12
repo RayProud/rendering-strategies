@@ -14,3 +14,12 @@ bin
 lib
 pyvenv.cfg
 ttfb_results.csv
+
+# Yarn 3
+.yarn/*
+!.yarn/patches
+!.yarn/releases
+!.yarn/plugins
+!.yarn/sdks
+!.yarn/versions
+.pnp.*
