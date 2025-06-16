@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Configuration
-URL="https://d3ojmmpfi3lxdg.cloudfront.net/server-static"          # AWS SST Next 14
+URL="https://cloudflare-opennext-14.mentimeter.workers.dev/server-static"          # CF OpenNext Next 14
 RPS=30
 DURATION=60
 OUTPUT_FILE="ttfb_results.csv"

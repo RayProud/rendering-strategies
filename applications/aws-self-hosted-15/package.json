@@ -2,7 +2,7 @@
   "name": "aws-self-hosted-15",
   "description": "Uses self-hosted AWS on Next.js 15",
   "version": "1.0.0",
-  "sideEffects": "false",
+  "sideEffects": false,
   "type": "module",
   "scripts": {
     "build": "next build",

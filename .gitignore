@@ -8,6 +8,8 @@ node_modules/
 # open-next
 .open-next
 
+.wrangler
+
 .idea
 .vercel
 bin
