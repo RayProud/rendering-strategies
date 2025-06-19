@@ -1,16 +1,13 @@
 #!/usr/bin/env bash
 
 # Configuration
-URL="https://cloudflare-opennext-14.mentimeter.workers.dev/server-static"          # CF OpenNext Next 14
+URL="https://cloudflare-opennext-15.mentimeter.workers.dev/server-static"          # CF OpenNext 1.3 Next 15
 RPS=30
 DURATION=60
-OUTPUT_FILE="ttfb_results.csv"
-
+TMP_FILE=$(mktemp "/tmp/ttfb.XXXXXX")
 END_TIME=$((SECONDS + DURATION))
-TMP_FILE=$(mktemp)
-echo "TTFB (seconds)" > "$OUTPUT_FILE"
 
-echo "Starting TTFB collection for $URL with $RPS RPS..."
+echo "Starting TTFB collection for $URL with $RPS RPS for $DURATION seconds..."
 
 make_request() {
     local result
@@ -20,6 +17,7 @@ make_request() {
     fi
 }
 
+# Collect data
 while [ $SECONDS -lt $END_TIME ]; do
     for ((i = 0; i < RPS; i++)); do
         make_request &
@@ -28,12 +26,12 @@ while [ $SECONDS -lt $END_TIME ]; do
     sleep 1
 done
 
-cat "$TMP_FILE" >> "$OUTPUT_FILE"
+mapfile -t TTFB_DATA < "$TMP_FILE"
 rm "$TMP_FILE"
 
-mapfile -t TTFB_DATA < <(tail -n +2 "$OUTPUT_FILE")
+TOTAL=${#TTFB_DATA[@]}
 
-if [ ${#TTFB_DATA[@]} -eq 0 ]; then
+if [ $TOTAL -eq 0 ]; then
     echo "❌ No TTFB data collected. Check your URL or network."
     exit 1
 fi
@@ -41,12 +39,17 @@ fi
 calculate_percentile() {
     local percentile=$1
     local sorted=($(printf '%s\n' "${TTFB_DATA[@]}" | sort -n))
-    local index=$(echo "(${#sorted[@]} - 1) * $percentile / 100" | bc -l)
-    local int_index=${index%.*}
-    echo "${sorted[$int_index]}"
+    local n=${#sorted[@]}
+    local rank=$(echo "($percentile / 100) * $n" | bc -l)
+    local index=$(printf "%.0f\n" "$rank")
+    ((index--))  # Convert to 0-based index
+    (( index < 0 )) && index=0
+    (( index >= n )) && index=$((n - 1))
+    echo "${sorted[$index]}"
 }
 
 echo
+echo "✅ TTFB collection complete. Total samples: $TOTAL"
 echo "Percentiles:"
 echo "p75: $(calculate_percentile 75) seconds"
 echo "p90: $(calculate_percentile 90) seconds"
