@@ -1,0 +1,10 @@
+{
+  "name": "nodejs-post-logger",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Simple Node.js server that logs headers for all POST requests",
+  "scripts": {
+    "start": "node server.mjs"
+  }
+}

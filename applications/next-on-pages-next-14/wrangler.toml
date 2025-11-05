@@ -1,0 +1,9 @@
+name = "next-on-pages-next-14"
+compatibility_date = "2025-06-07"
+compatibility_flags = ["nodejs_compat"]
+pages_build_output_dir = ".vercel/output/static"
+pages_functions_dir = ".vercel/output/functions"
+
+[vars]
+NEXTJS_ENV = "development"
+POST_LOGGER_ENDPOINT = "http://127.0.0.1:3000/"
