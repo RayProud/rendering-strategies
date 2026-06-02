@@ -1,28 +1,30 @@
 {
-  "name": "rendering-next",
+  "name": "rendering-strategies",
   "version": "0.1.0",
   "private": true,
+  "workspaces": [
+    "apps/*"
+  ],
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
-  },
-  "dependencies": {
-    "next": "14.2.15",
-    "react": "^18",
-    "react-dom": "^18",
-    "server-only": "^0.0.1"
+    "dev:classic": "npm run dev -w classic",
+    "dev:ppr": "npm run dev -w ppr",
+    "build": "npm run build -w classic && npm run build -w ppr",
+    "build:classic": "npm run build -w classic",
+    "build:ppr": "npm run build -w ppr",
+    "analyze:rsc": "node scripts/rsc-graph.mjs",
+    "analyze:rsc:check": "node scripts/rsc-graph.mjs --check"
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
     "@types/node": "^20",
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
-    "eslint": "^8",
-    "eslint-config-next": "14.2.15",
+    "@types/react": "19.2.16",
+    "@types/react-dom": "19.2.3",
     "postcss": "^8",
     "tailwindcss": "^3.4.1",
     "typescript": "^5"
+  },
+  "overrides": {
+    "@types/react": "19.2.16",
+    "@types/react-dom": "19.2.3"
   }
 }

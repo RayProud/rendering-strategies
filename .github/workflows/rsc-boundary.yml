@@ -1,0 +1,64 @@
+name: RSC boundary check
+
+# Fails a PR when a component silently flips toward the client bundle (e.g. a
+# 'use client' dropped mid-chain that drags its descendants across the boundary).
+# Posts the diff as a PR comment so the change is reviewable.
+
+on:
+  pull_request:
+    branches: [main, examples]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  rsc-boundary:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - run: npm ci
+
+      # Capture the analyzer output whether it passes or fails.
+      - name: Analyze RSC boundaries
+        id: analyze
+        run: |
+          set +e
+          OUT=$(npm run --silent analyze:rsc:check 2>&1)
+          CODE=$?
+          echo "$OUT"
+          {
+            echo 'report<<EOF'
+            echo "$OUT"
+            echo 'EOF'
+          } >> "$GITHUB_OUTPUT"
+          exit $CODE
+
+      # On failure, comment the report on the PR.
+      - name: Comment on regression
+        if: failure() && github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const report = `${{ steps.analyze.outputs.report }}`;
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: [
+                '### 🟠 RSC boundary regression',
+                'A module now ships more to the client than the committed snapshot expects.',
+                '',
+                '```',
+                report,
+                '```',
+                '',
+                'If this is intended, run `npm run analyze:rsc` locally and commit the updated `rsc-graph.snapshot.json`.',
+              ].join('\n'),
+            });
